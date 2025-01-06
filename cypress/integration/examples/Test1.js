@@ -4,7 +4,7 @@
 /// <reference types="cypress" />
 
 describe('My First Test Suite', () => {
-    it('Test case for Product Search', () => {
+    it('Test product search and cart', () => {
         //test step
         cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
         cy.get('.search-keyword').type('ca')
@@ -18,16 +18,18 @@ describe('My First Test Suite', () => {
         // Parent child chaining
         cy.get('.products').find('.product').should('have.length', 4)
 
-        cy.get('.products').find('.product').eq(1).contains('ADD TO CART').click()
+        // cy.get('.products').find('.product').eq(1).contains('ADD TO CART').click()
+        // cy.get('.products .product').eq(2).contains('ADD TO CART').click()
+        // cy.get('.products .product').eq(2).should('contain.text', 'ADDED')
 
-        cy.get('.products .product').eq(2).contains('ADD TO CART').click()
+        cy.get('.products .product').each(($el, $list) => {
 
-        cy.wait(2000)
+            const textVeg = $el.find('h4.product-name').text()
 
-        cy.get('.products .product').eq(2).should('contain.text', 'ADDED');
-
-
-        cy.get('.cart-icon > img').click()
-
+            if(textVeg.includes('Capsicum')){
+                cy.wrap($el).find('button').click();
+            }
+        })
+        // cy.get('.products .product').eq(2).should('contain.text', 'ADDED')
     })
   })
