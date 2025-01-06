@@ -15,11 +15,17 @@ describe('My First Test Suite', () => {
 
         cy.get('.products .product').should('have.length', 4)
 
+
         // Parent child chaining
-        cy.get('.products').find('.product').should('have.length', 4)
+        cy.get('.products').as('productLocator')
+
+        cy.get('@productLocator').find('.product').should('have.length', 4)
+        // cy.get('.products').find('.product').should('have.length', 4)
+
+        cy.get('@productLocator').find('.product').eq(1).contains('ADD TO CART').click()
 
         // cy.get('.products').find('.product').eq(1).contains('ADD TO CART').click()
-        // cy.get('.products .product').eq(2).contains('ADD TO CART').click()
+        cy.get('.products .product').eq(1).contains('ADD TO CART').click()
         // cy.get('.products .product').eq(2).should('contain.text', 'ADDED')
 
         cy.get('.products .product').each(($el, $list) => {
@@ -30,6 +36,13 @@ describe('My First Test Suite', () => {
                 cy.wrap($el).find('button').click();
             }
         })
-        // cy.get('.products .product').eq(2).should('contain.text', 'ADDED')
+      
+        //assert if logo text is correctly displayed
+        cy.get('.brand').should('have.text','GREENKART')
+
+        //this is to print in logs
+        cy.get('.brand').then(function(logoelement){
+            cy.log(logoelement.text())
+        })
     })
   })
