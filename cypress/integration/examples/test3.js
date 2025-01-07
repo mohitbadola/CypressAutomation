@@ -14,14 +14,21 @@ describe('test suite', ()=>{
         // //Static dropdown
         // cy.get('select').select('option2').should('have.value', 'option2')
 
-        //Dynamic dropdown
-        cy.get('#autocomplete').type('Ind')
+        // //Dynamic dropdown
+        // cy.get('#autocomplete').type('Ind')
 
-        cy.get('.ui-menu-item div').each(($el, $list)=>{
-            if($el.text() === 'India'){
-                cy.wrap($el).click()
-            }
-        })
-        cy.get('#autocomplete').should('have.value', 'India')
+        // cy.get('.ui-menu-item div').each(($el, $list)=>{
+        //     if($el.text() === 'India'){
+        //         cy.wrap($el).click()
+        //     }
+        // })
+        // cy.get('#autocomplete').should('have.value', 'India')
+
+
+        // Handling visible and non visible elements using Assertions
+        cy.get('#displayed-text').should('be.visible')
+        cy.get('#hide-textbox').click()
+        cy.get('#displayed-text').should('not.be.visible')
+        
     })
 })
