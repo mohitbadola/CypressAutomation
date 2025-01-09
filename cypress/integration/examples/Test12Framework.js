@@ -14,7 +14,7 @@ describe("End to End ecommerce test", () => {
 
     const productName = this.data.productName;
 
-    this.homepage.goTo("https://rahulshettyacademy.com/loginpagePractise/#");
+    this.homepage.goTo(Cypress.env('url')+"/loginpagePractise/#");
 
     // cy.log(this.data.username);
 

@@ -3,7 +3,7 @@
 describe('test suite', ()=>{
     it('test checkboxes and dropdown', ()=>{
 
-        cy.visit('https://rahulshettyacademy.com/AutomationPractice/')
+        cy.visit(Cypress.env('url')+'/AutomationPractice/')
 
         // //check boxes
         // cy.get('#checkBoxOption1').check().should('be.checked').and('have.value', 'option1')

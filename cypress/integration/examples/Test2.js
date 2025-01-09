@@ -6,7 +6,7 @@
 describe('Test Suite', () => {
     it('Test placing order', () => {
         //test step
-        cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
+        cy.visit(Cypress.env('url')+"/seleniumPractise/#/")
         cy.get('.search-keyword').type('ca')
         cy.wait(2000)
         // Parent child chaining
