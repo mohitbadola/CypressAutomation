@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run",
-    "headTest": "npx run test --headed",
-    "chromeTest": "npx run test --browser chrome",
+    "headTest": "npm run test -- --headed",
+    "chromeTest": "npm run test -- --browser chrome",
     "GreenKartTest": "npx cypress run --spec \"cypress/integration/GreenKart/*\"",
     "SmokeTest": "npx cypress run --spec \"cypress/integration/GreenKart/Test1.js\""
 
