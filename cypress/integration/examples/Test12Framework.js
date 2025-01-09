@@ -1,10 +1,18 @@
 describe('End to End ecommerce test', ()=>{
-    it('Submit Order', ()=>{
 
-        const productName = 'Nokia Edge'
+    before(function(){                      
+        //runs once before all tests in the block
+        cy.fixture('example').then((data)=>{
+            this.data = data;
+        })
+    })
+
+    it('Submit Order', function(){
+
+        const productName = this.data.productName
         cy.visit('https://rahulshettyacademy.com/loginpagePractise/#')
-        cy.get('#username').type('rahulshettyacademy')
-        cy.get('#password').type('learning')
+        cy.get('#username').type(this.data.username)
+        cy.get('#password').type(this.data.password)
         cy.contains('Sign In').click()
         cy.contains('Shop Name').should('be.visible')
         cy.get('app-card').should('have.length', 4)
