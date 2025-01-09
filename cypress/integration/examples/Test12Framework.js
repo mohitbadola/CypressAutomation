@@ -1,39 +1,42 @@
 import HomePage from "../../support/pageObjects/HomePage";
 
-describe('End to End ecommerce test', ()=>{
+describe("End to End ecommerce test", () => {
+  before(function () {
+    //runs once before all tests in the block
+    cy.fixture("example").then((data) => {
+      this.data = data;
+      this.homepage = new HomePage();
+    });
+  });
 
-    before(function(){                      
-        //runs once before all tests in the block
-        cy.fixture('example').then((data)=>{
-            this.data = data;
-            this.homepage = new HomePage();
-        })
-    })
+  it("Submit Order", function () {
+    // Cypress.config('defaultCommandTimeout', 8000)
 
-    it('Submit Order', function(){
+    const productName = this.data.productName;
 
-        // Cypress.config('defaultCommandTimeout', 8000)
+    this.homepage.goTo("https://rahulshettyacademy.com/loginpagePractise/#");
 
-        const productName = this.data.productName;
+    // cy.log(this.data.username);
 
-        this.homepage.goTo('https://rahulshettyacademy.com/loginpagePractise/#');
+    const productPage = this.homepage.login(
+      this.data.username,
+      this.data.password
+    );
+    productPage.pageValidation();
+    productPage.getCardCount().should("have.length", 4);
+    productPage.selectProduct(productName);
+    productPage.selectFirstProduct();
 
-        // cy.log(this.data.username);
-        
-        const productPage = this.homepage.login(this.data.username, this.data.password)
-        productPage.pageValidation();
-        productPage.verifyCardLimit();
-        productPage.selectProduct(productName);
-        productPage.selectFirstProduct();
+    // cy.pause();
 
-        // cy.pause();
+    const cartPage = productPage.goToCart();
+    
+    cartPage.sumOfProducts().then(function (sum) {
+        expect(sum).to.be.lessThan(200000);
+    });
 
-        const cartPage = productPage.goToCart();
-        cartPage.sumLessThanLimit();
-        const confirmationPage = cartPage.checkOut();
-        confirmationPage.submitFormDetails();
-        confirmationPage.getAlertMessage();
-       
-
-    })
-})
+    const confirmationPage = cartPage.checkOutItems();
+    confirmationPage.submitFormDetails();
+    confirmationPage.getAlertMessage().should('contain', 'Success');
+  });
+});

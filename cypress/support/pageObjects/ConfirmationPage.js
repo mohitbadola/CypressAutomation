@@ -8,7 +8,7 @@ class ConfirmationPage{
     }
 
     getAlertMessage(){
-        cy.get('.alert').should('contain', 'Success');
+       return cy.get('.alert');
     }
 
 }
