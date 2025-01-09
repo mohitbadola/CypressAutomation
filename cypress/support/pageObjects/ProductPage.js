@@ -15,19 +15,19 @@ class ProductPage{
     }
 
     selectFirstProduct(){
-        cy.get('app-card').eq(0).contains('button', 'Add').click()
+        cy.get('app-card').eq(0).contains('button', 'Add').click();
     }
 
     goToCart(){
-        cy.contains('a', 'Checkout').click()
+        cy.contains('a', 'Checkout').click();
         return new CartPage();
     }
 
     selectProduct(productName){
 
         cy.get('app-card').filter(`:contains("${productName}")`).then($element=>{
-            cy.wrap($element).should('have.length', 1)
-            cy.wrap($element).contains('button', 'Add').click()
+            cy.wrap($element).should('have.length', 1);
+            cy.wrap($element).contains('button', 'Add').click();
         })
 
     }

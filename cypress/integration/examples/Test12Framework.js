@@ -17,11 +17,16 @@ describe('End to End ecommerce test', ()=>{
         const productName = this.data.productName;
 
         this.homepage.goTo('https://rahulshettyacademy.com/loginpagePractise/#');
+
+        // cy.log(this.data.username);
+        
         const productPage = this.homepage.login(this.data.username, this.data.password)
         productPage.pageValidation();
         productPage.verifyCardLimit();
         productPage.selectProduct(productName);
         productPage.selectFirstProduct();
+
+        // cy.pause();
 
         const cartPage = productPage.goToCart();
         cartPage.sumLessThanLimit();
