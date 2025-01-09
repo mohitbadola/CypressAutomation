@@ -9,6 +9,8 @@ describe('End to End ecommerce test', ()=>{
 
     it('Submit Order', function(){
 
+        // Cypress.config('defaultCommandTimeout', 8000)
+
         const productName = this.data.productName
         cy.visit('https://rahulshettyacademy.com/loginpagePractise/#')
         cy.get('#username').type(this.data.username)
@@ -35,8 +37,7 @@ describe('End to End ecommerce test', ()=>{
         cy.contains('button', 'Checkout').click();
         cy.get('#country').type("India");
 
-        Cypress.config('defaultCommandTimeout:8000')
-        cy.get('.suggestions ul li a').click();
+        cy.get('.suggestions ul li a', { timeout: 10000 }).click();
 
         cy.contains('input', 'Purchase').click();
         cy.get('.alert').should('contain', 'Success')
