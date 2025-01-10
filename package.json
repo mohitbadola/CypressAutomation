@@ -9,7 +9,6 @@
     "chromeTest": "npm run test -- --browser chrome",
     "GreenKartTest": "npx cypress run --spec \"cypress/integration/GreenKart/*\"",
     "SmokeTest": "npx cypress run --spec \"cypress/integration/GreenKart/Test1.js\""
-
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +16,8 @@
     "cypress": "^13.17.0",
     "cypress-iframe": "^1.0.1",
     "cypress-mochawesome-reporter": "^3.8.2"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^21.0.3"
   }
 }
