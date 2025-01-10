@@ -28,3 +28,12 @@ Cypress.Commands.add('submitFormDetails', ()=>{
     cy.get('.suggestions ul li a', { timeout: 10000 }).click();
     cy.contains('input', 'Purchase').click();
 })
+
+Cypress.Commands.add("LoginAPI", ()=>{
+    cy.request("POST", "https://rahulshettyacademy.com/api/ecom/auth/login", 
+    {"userEmail":"rahulshetty@gmail.com", "userPassword":"Iamking@00"}).
+    then(function(response){
+        expect(response.status).to.equal(200)
+        Cypress.env('token', response.body.token);
+    })
+})
