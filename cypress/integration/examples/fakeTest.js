@@ -15,14 +15,22 @@ describe("My First Api Test Suite", () => {
           {
             book_name: "RestAssured with Java",
             isbn: "LSA",
-            aisle: "2303",
+            aisle: "2303"
           },
         ],
       }
     ).as('bookretrievals')
 
     cy.get("button[class='btn btn-primary']").click();
-    cy.wait('@bookretrievals');
+
+    cy.wait('@bookretrievals').then(({request, response})=>{
+        cy.get('tr').should('have.length',response.body.length+1);
+    });
+
     cy.get('p').should('have.text','Oops only 1 Book available');
+
+
+
+    //Length of response array  = rows of the table
   });
 });
