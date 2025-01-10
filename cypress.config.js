@@ -30,8 +30,8 @@ module.exports = defineConfig({
     url: "https://rahulshettyacademy.com",
   },
   e2e: {
-    // specPattern: 'cypress/integration/examples/*.js',
-    specPattern: "cypress/integration/examples/BDD/*.feature", // Recursive pattern
+    specPattern: 'cypress/integration/examples/*.js',
+    // specPattern: "cypress/integration/examples/BDD/*.feature", // Recursive pattern
     supportFile: "cypress/support/e2e.js", // Ensure this exists
     setupNodeEvents,
   },
