@@ -1,4 +1,7 @@
 const { defineConfig } = require("cypress");
+const excelToJson = require('convert-excel-to-json');
+const fs = require('fs');
+
 const browserify = require("@cypress/browserify-preprocessor");
 const {
   addCucumberPreprocessorPlugin,
@@ -19,6 +22,15 @@ async function setupNodeEvents(on, config) {
     "file:preprocessor",
     browserify(preprendTransformerToOptions(config, browserify.defaultOptions))
   );
+
+  on('task', {
+    excelToJsonConverter(filePath){
+      const result = excelToJson({
+        source: fs.readFileSync(filePath) // fs.readFileSync return a Buffer
+    });
+    return result;
+    }
+  })
 
   return config;
 }
