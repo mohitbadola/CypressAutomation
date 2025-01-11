@@ -37,5 +37,9 @@ describe('JWT Session', () => {
       cy.log(result.data[1].A); //id
       expect(productName).equal(result.data[1].B); 
     });
+    
+    cy.readFile(filePath).then(function(text){
+      expect(text).to.include(productName);
+    })
   });
 });
