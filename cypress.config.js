@@ -33,7 +33,13 @@ async function setupNodeEvents(on, config) {
     
       const cell = worksheet.getCell(output.row, output.column+change.colChange);
       cell.value = replaceText;
-      await workbook.xlsx.writeFile(filePath);
+      return workbook.xlsx.writeFile(filePath).then(()=>{
+        return true;
+      })
+      .catch((error)=>{
+        return false;
+      }
+    );
     }
   })
 
